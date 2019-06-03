@@ -15,6 +15,8 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'jebberjeb/clojure-socketrepl.nvim'
 Plug 'qpkorr/vim-bufkill'
 Plug 'hkupty/iron.nvim'
+Plug 'connorholyday/vim-snazzy'
+Plug 'nightsense/plumber'
 call plug#end()
 
 " Python dependency for plugins
@@ -28,6 +30,13 @@ let g:deoplete#enable_at_startup = 1
 " Open nerdtree with alt + z 
 :map Ω : NERDTreeToggle<ENTER>
 
+" NerdTree ignore pyc
+let NERDTreeIgnore = ['\.pyc$']
+
+" Open IronRepl with alt + x
+:map ≈ : IronRepl<ENTER>
+
+
 " Open file menu
 nnoremap <Leader>o :CtrlP<CR>
 " Open buffer menu
@@ -37,8 +46,15 @@ nnoremap <Leader>f :CtrlPMRUFiles<CR>
 " kill buffers with leader x
 noremap <Leader>x :BD<CR>
 
-" visual mode map ctr to ef: IronRepl evaluate form
-vnoremap ef ctr
+" Toggle between normal and relative numbering.
+nnoremap <leader>n :call NumberToggle()<cr>
+
+" REPL
+
+noremap <Leader>r :IronRepl<CR>
+nmap <Leader>w Vctr
+nmap <Leader>e VGctr
+tnoremap <Esc> <C-\><C-n>
 
 " Config for airline bar - the status bar..
 let g:airline#extensions#tabline#enabled = 2
@@ -115,9 +131,6 @@ function! NumberToggle()
   endif
 endfunc
 
-" Toggle between normal and relative numbering.
-nnoremap <leader>r :call NumberToggle()<cr>
-
 set relativenumber
 
 "Higlight Cursor Line
@@ -192,7 +205,9 @@ set showmatch
 "set termguicolors
 
 "Set the colorscheme
-colorscheme industry
+"colorscheme industry
+"colorscheme snazzy
+colorscheme plumber-dark
 
 "Set a colored column at 110 width
 set colorcolumn=110
