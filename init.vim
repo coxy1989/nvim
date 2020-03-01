@@ -10,23 +10,24 @@ let mapleader="\<SPACE>"
 
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'hkupty/iron.nvim', { 'branch' : 'legacy'}
 Plug 'kien/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
-Plug 'Shougo/deoplete.nvim'
 Plug 'qpkorr/vim-bufkill'
 Plug 'connorholyday/vim-snazzy'
 Plug 'nightsense/plumber'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'ddrscott/vim-side-search'
 Plug 'rking/ag.vim'
+Plug 'mtikekar/nvim-send-to-term'
+Plug 'Shougo/deoplete.nvim'
 "Plug 'jebberjeb/clojure-socketrepl.nvim'
+"Plug 'hkupty/iron.nvim' ", { 'branch' : 'legacy'}
 call plug#end()
 
 " Python dependency for plugins
 " let g:python_host_prog = '/Users/james.cox/.pyenv/versions/neovim2/bin/python'
 " Using 3.5.x as here as clojure-vim/acid.nvim crashes with python < 3.5
-" let g:python3_host_prog = '/Users/james.cox/.pyenv/versions/neovim3-5-3/bin/python'
+let g:python3_host_prog = '/Users/james.cox/.pyenv/versions/neovim3-7-4/bin/python'
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
@@ -38,8 +39,8 @@ let g:deoplete#enable_at_startup = 1
 let NERDTreeIgnore = ['\.pyc$']
 
 " Open IronRepl with alt + x
-:map ≈ : IronRepl<ENTER>
-:map ç : IronPromptRepl<ENTER> 
+":map ≈ : IronRepl<ENTER>
+":map ç : IronPromptRepl<ENTER> 
 
 
 " ag config
@@ -57,7 +58,7 @@ let g:side_search_splitter = 'vnew'
 let g:side_search_split_pct = 0.4
 
 " SideSearch current word and return to original window
-nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
+"nnoremap <Leader>ss :SideSearch <C-r><C-w><CR> | wincmd p
 
 " Create an shorter `SS` command
 command! -complete=file -nargs=+ SS execute 'SideSearch <args>'
@@ -84,11 +85,18 @@ noremap <Leader>x :BD<CR>
 " Toggle between normal and relative numbering.
 nnoremap <leader>n :call NumberToggle()<cr>
 
-" REPL
+" Iron REPL
 
-noremap <Leader>r :IronRepl<CR>
-nmap <Leader>w Vctr
-nmap <Leader>e VGctr
+"noremap <Leader>r :IronRepl<CR>
+"nmap <Leader>w Vctr
+"nmap <Leader>e VGctr
+"tnoremap <Esc> <C-\><C-n>
+
+" STT REPL
+noremap <Leader>t :terminal<CR>
+noremap <Leader>r :SendHere ipy<CR>
+nmap <Leader>s ss
+nmap <Leader>a VGs
 tnoremap <Esc> <C-\><C-n>
 
 " Config for airline bar - the status bar..
